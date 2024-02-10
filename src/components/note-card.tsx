@@ -36,7 +36,7 @@ export function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
             <X className="size-5" />
           </Dialog.Close>
 
-          <div className="flex flex-1 flex-col gap-3 p-5">
+          <div className="flex flex-1 flex-col gap-3 p-5 overflow-auto">
             <span className="text-sm font-medium text-slate-300">
               {formatDistanceToNow(note.date, {
                 locale: ptBR,

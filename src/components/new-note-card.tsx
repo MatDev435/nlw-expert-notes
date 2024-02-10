@@ -13,6 +13,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [shouldShowOnboarding, setShouldShowOnboarding] = useState(true)
   const [content, setContent] = useState('')
   const [isRecording, setIsRecording] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false) // Add new state variable
 
   function handleStartEditor() {
     setShouldShowOnboarding(false)
@@ -39,6 +40,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
 
     setContent('')
     setShouldShowOnboarding(true)
+    setIsModalOpen(false)
   }
 
   function handleStartRecording() {
@@ -52,6 +54,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
 
     setIsRecording(true)
     setShouldShowOnboarding(false)
+    setIsModalOpen(true) // Open the modal
 
     const SpeechRecognitionAPI =
       window.SpeechRecognition || window.webkitSpeechRecognition
@@ -87,7 +90,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   }
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
       <Dialog.Trigger className="flex flex-col rounded-md bg-slate-700 p-5 gap-3 text-left hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400">
         <span className="text-sm font-medium text-slate-200">
           Adicionar nota
